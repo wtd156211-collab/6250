@@ -1,0 +1,25 @@
+{
+  "name": "write_write_conflict",
+  "events": [
+    {"t": 0, "op": "begin", "tx": "T0"},
+    {"t": 0, "op": "write", "tx": "T0", "key": "k1", "value": 10},
+    {"t": 0, "op": "commit", "tx": "T0"},
+    {"t": 1, "op": "begin", "tx": "T1"},
+    {"t": 2, "op": "begin", "tx": "T2"},
+    {"t": 3, "op": "write", "tx": "T1", "key": "k1", "value": 11},
+    {"t": 4, "op": "write", "tx": "T2", "key": "k1", "value": 22},
+    {"t": 5, "op": "commit", "tx": "T1"},
+    {"t": 6, "op": "commit", "tx": "T2"},
+    {"t": 7, "op": "begin", "tx": "T3"},
+    {"t": 8, "op": "read", "tx": "T3", "key": "k1"},
+    {"t": 9, "op": "write", "tx": "T3", "key": "k1", "value": 33},
+    {"t": 10, "op": "commit", "tx": "T3"},
+    {"t": 11, "op": "begin", "tx": "T4"},
+    {"t": 12, "op": "read", "tx": "T4", "key": "k1"},
+    {"t": 13, "op": "begin", "tx": "T5"},
+    {"t": 13, "op": "write", "tx": "T5", "key": "k1", "value": 44},
+    {"t": 13, "op": "commit", "tx": "T5"},
+    {"t": 14, "op": "write", "tx": "T4", "key": "k1", "value": 55},
+    {"t": 15, "op": "commit", "tx": "T4"}
+  ]
+}

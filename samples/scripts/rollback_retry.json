@@ -1,0 +1,22 @@
+{
+  "name": "rollback_retry",
+  "events": [
+    {"t": 0, "op": "begin", "tx": "T0"},
+    {"t": 0, "op": "write", "tx": "T0", "key": "k1", "value": 5},
+    {"t": 0, "op": "commit", "tx": "T0"},
+    {"t": 1, "op": "begin", "tx": "T1"},
+    {"t": 2, "op": "read", "tx": "T1", "key": "k1"},
+    {"t": 3, "op": "write", "tx": "T1", "key": "k1", "value": 6},
+    {"t": 4, "op": "begin", "tx": "W1"},
+    {"t": 4, "op": "write", "tx": "W1", "key": "k1", "value": 9},
+    {"t": 4, "op": "commit", "tx": "W1"},
+    {"t": 5, "op": "rollback", "tx": "T1"},
+    {"t": 6, "op": "begin", "tx": "T2"},
+    {"t": 7, "op": "read", "tx": "T2", "key": "k1"},
+    {"t": 8, "op": "write", "tx": "T2", "key": "k1", "value": 10},
+    {"t": 9, "op": "commit", "tx": "T2"},
+    {"t": 10, "op": "begin", "tx": "T3"},
+    {"t": 10, "op": "read", "tx": "T3", "key": "k1"},
+    {"t": 10, "op": "commit", "tx": "T3"}
+  ]
+}

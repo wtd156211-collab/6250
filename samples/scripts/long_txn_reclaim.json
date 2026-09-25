@@ -1,0 +1,33 @@
+{
+  "name": "long_txn_reclaim",
+  "events": [
+    {"t": 0, "op": "begin", "tx": "T0"},
+    {"t": 0, "op": "write", "tx": "T0", "key": "k1", "value": 0},
+    {"t": 0, "op": "commit", "tx": "T0"},
+    {"t": 1, "op": "begin", "tx": "T1"},
+    {"t": 2, "op": "read", "tx": "T1", "key": "k1"},
+    {"t": 3, "op": "begin", "tx": "T2"},
+    {"t": 3, "op": "write", "tx": "T2", "key": "k1", "value": 1},
+    {"t": 3, "op": "commit", "tx": "T2"},
+    {"t": 4, "op": "begin", "tx": "T3"},
+    {"t": 4, "op": "write", "tx": "T3", "key": "k1", "value": 2},
+    {"t": 4, "op": "commit", "tx": "T3"},
+    {"t": 5, "op": "begin", "tx": "T4"},
+    {"t": 5, "op": "write", "tx": "T4", "key": "k1", "value": 3},
+    {"t": 5, "op": "commit", "tx": "T4"},
+    {"t": 6, "op": "begin", "tx": "T5"},
+    {"t": 6, "op": "write", "tx": "T5", "key": "k1", "value": 4},
+    {"t": 6, "op": "commit", "tx": "T5"},
+    {"t": 7, "op": "begin", "tx": "T6"},
+    {"t": 7, "op": "write", "tx": "T6", "key": "k1", "value": 5},
+    {"t": 7, "op": "commit", "tx": "T6"},
+    {"t": 8, "op": "read", "tx": "T1", "key": "k1"},
+    {"t": 9, "op": "begin", "tx": "T7"},
+    {"t": 9, "op": "write", "tx": "T7", "key": "k1", "value": 6},
+    {"t": 9, "op": "commit", "tx": "T7"},
+    {"t": 10, "op": "commit", "tx": "T1"},
+    {"t": 11, "op": "begin", "tx": "T8"},
+    {"t": 11, "op": "read", "tx": "T8", "key": "k1"},
+    {"t": 11, "op": "commit", "tx": "T8"}
+  ]
+}

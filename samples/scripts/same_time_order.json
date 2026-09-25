@@ -1,0 +1,21 @@
+{
+  "name": "same_time_order",
+  "events": [
+    {"t": 0, "op": "begin", "tx": "T0"},
+    {"t": 0, "op": "write", "tx": "T0", "key": "k1", "value": 1},
+    {"t": 0, "op": "commit", "tx": "T0"},
+    {"t": 0, "op": "begin", "tx": "T1"},
+    {"t": 0, "op": "begin", "tx": "T2"},
+    {"t": 0, "op": "read", "tx": "T1", "key": "k1"},
+    {"t": 0, "op": "write", "tx": "T1", "key": "k1", "value": 5},
+    {"t": 0, "op": "read", "tx": "T1", "key": "k1"},
+    {"t": 0, "op": "write", "tx": "T2", "key": "k2", "value": 9},
+    {"t": 0, "op": "commit", "tx": "T1"},
+    {"t": 0, "op": "commit", "tx": "T2"},
+    {"t": 1, "op": "begin", "tx": "T3"},
+    {"t": 1, "op": "read", "tx": "T3", "key": "k1"},
+    {"t": 1, "op": "write", "tx": "T3", "key": "k1", "value": 6},
+    {"t": 1, "op": "read", "tx": "T3", "key": "k2"},
+    {"t": 1, "op": "commit", "tx": "T3"}
+  ]
+}

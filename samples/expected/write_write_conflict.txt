@@ -1,0 +1,24 @@
+0|BEGIN|T0|-|-|-|snapshot=0
+0|WRITE|T0|k1|-|10|-
+0|COMMIT|T0|-|-|-|ver=1 wrote=k1 versions=1
+1|BEGIN|T1|-|-|-|snapshot=1
+2|BEGIN|T2|-|-|-|snapshot=1
+3|WRITE|T1|k1|-|11|-
+4|WRITE|T2|k1|-|22|-
+5|COMMIT|T1|-|-|-|ver=2 wrote=k1 versions=2
+6|ABORT|T2|k1|-|-|reason=write_write with=T1 versions=1
+6|RECLAIM|-|k1|-|-|watermark=2 dropped=1 kept=2
+7|BEGIN|T3|-|-|-|snapshot=2
+8|READ|T3|k1|2|11|-
+9|WRITE|T3|k1|-|33|-
+10|COMMIT|T3|-|-|-|ver=3 wrote=k1 versions=1
+10|RECLAIM|-|k1|-|-|watermark=3 dropped=2 kept=3
+11|BEGIN|T4|-|-|-|snapshot=3
+12|READ|T4|k1|3|33|-
+13|BEGIN|T5|-|-|-|snapshot=3
+13|WRITE|T5|k1|-|44|-
+13|COMMIT|T5|-|-|-|ver=4 wrote=k1 versions=2
+14|WRITE|T4|k1|-|55|-
+15|ABORT|T4|k1|-|-|reason=write_write with=T5 versions=1
+15|RECLAIM|-|k1|-|-|watermark=4 dropped=3 kept=4
+15|SUMMARY|-|-|-|-|abort=2 begin=6 commit=4 reclaim=3 rollback=0 versions=1

@@ -1,0 +1,19 @@
+0|BEGIN|T0|-|-|-|snapshot=0
+0|WRITE|T0|k1|-|1|-
+0|COMMIT|T0|-|-|-|ver=1 wrote=k1 versions=1
+0|BEGIN|T1|-|-|-|snapshot=1
+0|BEGIN|T2|-|-|-|snapshot=1
+0|READ|T1|k1|1|1|-
+0|WRITE|T1|k1|-|5|-
+0|READ|T1|k1|-|5|-
+0|WRITE|T2|k2|-|9|-
+0|COMMIT|T1|-|-|-|ver=2 wrote=k1 versions=2
+0|COMMIT|T2|-|-|-|ver=3 wrote=k2 versions=2
+0|RECLAIM|-|k1|-|-|watermark=3 dropped=1 kept=2
+1|BEGIN|T3|-|-|-|snapshot=3
+1|READ|T3|k1|2|5|-
+1|WRITE|T3|k1|-|6|-
+1|READ|T3|k2|3|9|-
+1|COMMIT|T3|-|-|-|ver=4 wrote=k1 versions=2
+1|RECLAIM|-|k1|-|-|watermark=4 dropped=2 kept=4
+1|SUMMARY|-|-|-|-|abort=0 begin=4 commit=4 reclaim=2 rollback=0 versions=2

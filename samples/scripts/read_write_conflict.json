@@ -1,0 +1,18 @@
+{
+  "name": "read_write_conflict",
+  "events": [
+    {"t": 0, "op": "begin", "tx": "T0"},
+    {"t": 0, "op": "write", "tx": "T0", "key": "k1", "value": 10},
+    {"t": 0, "op": "commit", "tx": "T0"},
+    {"t": 1, "op": "begin", "tx": "T1"},
+    {"t": 2, "op": "read", "tx": "T1", "key": "k1"},
+    {"t": 3, "op": "write", "tx": "T1", "key": "k2", "value": 5},
+    {"t": 4, "op": "begin", "tx": "T2"},
+    {"t": 5, "op": "write", "tx": "T2", "key": "k1", "value": 20},
+    {"t": 6, "op": "commit", "tx": "T2"},
+    {"t": 7, "op": "commit", "tx": "T1"},
+    {"t": 8, "op": "begin", "tx": "T3"},
+    {"t": 8, "op": "read", "tx": "T3", "key": "k2"},
+    {"t": 8, "op": "commit", "tx": "T3"}
+  ]
+}
